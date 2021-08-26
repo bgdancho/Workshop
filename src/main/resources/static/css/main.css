@@ -1,0 +1,67 @@
+*{
+    font-family: 'Roboto', sans-serif;
+}
+container{
+    display: inline-block;
+}
+body{
+    text-align: center;
+}
+nav{
+    background-color: #15d19c;
+    height: 50px;
+    border-radius: 5px;
+
+}
+
+nav a:hover{
+    background-color: rgb(177, 80, 23);
+}
+
+nav a{
+   float: left;
+   color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+
+}
+nav a:hover{
+    background-color: #ddd;
+    color: black;
+}
+.contact{
+float:right;
+}
+
+h1{
+    text-align: center;
+    color:#265252
+}
+
+img{
+    display: inline-block;
+    width: 30%;
+    border-radius: 10px;
+}
+button{
+    background-color: #15d19c;
+    color: cornsilk;
+    border-radius: 10px;
+
+}
+table {
+    border: 2px solid red ;
+}
+form {
+align-self: center;
+}
+.reservation{
+margin-top:100px;
+ margin-left: auto;
+ margin-right: auto;
+}
+.info {
+display: inline-block;
+}

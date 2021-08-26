@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/segments :: header">
+</head>
+<body>
+<nav th:replace="fragments/segments :: nav"></nav>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Customer</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Date</th>
+        <th></th>
+        <th></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reservation : ${reservations}">
+        <td th:text="${reservation.id}"/>
+        <td th:text="${reservation.customerName}"/>
+        <td th:text="${reservation.phoneNumber}"/>
+        <td th:text="${reservation.email}"/>
+        <td th:text="${reservation.date}"/>
+        <td>
+            <form th:action="@{/reservation/update-reservation}" th:object="${toUpdate}" method="post">
+                <input type="hidden" name="id" th:value="${reservation.id}">
+                <button type="submit">Update</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/reservation/delete-reservation}" th:object="${toUpdate}" method="post">
+                <input type="hidden" name="id" th:value="${reservation.id}">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+
+
+        </th>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
+</body>
+</html>

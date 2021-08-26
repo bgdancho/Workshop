@@ -1,0 +1,39 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="fragments/segments :: header">
+    </head>
+<body>
+<nav th:replace="fragments/segments :: nav" ></nav>
+<div></div>
+<div >
+
+    <div>
+        <form th:action="@{/register/save}" th:object="${userAccount}" method="post">
+            <h3>Registration Form</h3>
+            <div >
+                <div >
+                    <input type="text" th:field="*{userName}" placeholder="User Name" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="">
+                    <input type="text" th:field="*{email}" placeholder="Email" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="">
+                    <input type="password" th:field="*{password}" placeholder="Password" class="form-control" />
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <button type="submit">Register User</button>
+                </div>
+            </div>
+            <!-- <span th:utext="${successMessage}"></span> -->
+        </form>
+    </div>
+</div>
+</body>
+</html>

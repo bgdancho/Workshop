@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="fragments/segments :: header">
+</head>
+<body>
+<nav th:replace="fragments/segments :: nav"></nav>
+Details for order
+
+<table>
+    <thead>
+    <tr>
+        <th>Order Id</th>
+        <th>Order status</th>
+        <th>Vehicle VIN</th>
+        <th>Model</th>
+        <th>Engine</th>
+        <th>License Plate</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${order.id}"/>
+        <td th:text="${order.status}"/>
+        <td th:text="${order.vehicle.vin}"/>
+        <td th:text="${order.vehicle.model}"/>
+        <td th:text="${order.vehicle.engineSize}"/>
+        <td th:text="${order.vehicle.licensePlate}"/>
+    </tr>
+    </tbody>
+</table>
+<table>
+    <thead>
+    <tr>
+        <td>Spare part</td>
+        <td>Code</td>
+        <td>Price</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="part : ${order.spareParts}">
+        <td th:text="${part.name}"></td>
+        <td th:text="${part.code}"></td>
+        <td th:text="${part.price}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+    <tr>
+        <td>Operation</td>
+        <td>Mechanic</td>
+        <td>Hours</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="operation : ${order.operations}">
+        <td th:text="${operation.type}"></td>
+        <td th:text="${operation.mechanic.name}"></td>
+        <td th:text="${operation.hours}"></td>
+    </tr>
+    </tbody>
+</table>
+<p>Add part to this order</p>
+<form th:action="@{/repairOrder/newPart}" method="post" th:object="${order}">
+    <input type="text" th:field="${order.id}">
+    <button>Add part</button>
+</form>
+
+<p>Add operation to this order</p>
+<form th:action="@{/repairOrder/newOperation}" method="post">
+    <input type="text" th:field="${order.id}">
+    <button>Add part</button>
+</form>
+
+</body>
+</html>

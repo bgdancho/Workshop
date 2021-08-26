@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/segments :: header">
+    <script type="text/javascript" th:src="@{js/new-reservation.js}"/>
+</head>
+<body>
+<nav th:replace="fragments/segments :: nav" ></nav>
+
+<form th:action="@{/reservation/check}" method="post">
+    <div class="reservation">
+        <label for="reservation">Choose a date for your appointment:</label>
+        <input type="date" id="reservation"
+               name="reservation" th:field="${reservation.date}" required>
+        <button type="submit" class="checkRes">Check availability</button>
+    </div>
+
+</form>
+
+
+</body>
+</html>

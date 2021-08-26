@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/segments :: header">
+</head>
+<body>
+<nav th:replace="fragments/segments :: nav" ></nav>
+
+<container>
+
+    <form th:action="@{/repairOrder/save}" method="post">
+        <div class="container">
+            <h1>Please fill in this form to create a new order</h1>
+            <hr>
+
+            <label for="VIN"><b>VIN:</b></label>
+            <input type="text" placeholder="Enter VIN" minlength="13" maxlength="17" name="VIN" id="VIN"
+                   th:field="${vehicle.vin}" required>
+
+            <label for="brand"><b>Manufacturer</b></label>
+            <input type="text" placeholder="VW, AUDI, PEUGEOT...." name="brand" id="brand" th:field="${vehicle.brand}"
+                   required>
+
+            <label for="model"><b>Model</b></label>
+            <input type="text" placeholder="Model" name="model" id="model" th:field="${vehicle.model}" required>
+
+            <label for="engine"><b>Engine</b></label>
+            <input type="text" placeholder="engine" name="engine" id="engine" th:field="${vehicle.engineSize}">
+
+            <label for="LP"><b>License Plate</b></label>
+            <input type="text" placeholder="License Plate" name="LP" id="LP" minlength="6" maxlength="16"
+                   th:field="${vehicle.licensePlate}">
+
+            <label for="mechanic"><b>Mechanic</b></label>
+<!--            <input type="text" placeholder="mechanic" name="mechanic" id="mechanic"-->
+<!--                   th:field="${mechanic.mechanicName}">-->
+            <select id="mechanic" th:field="${mechanic.id}">
+                <option th:each="mech : ${mechanicsList}"
+                        th:value="${mech.Id}"
+                        th:utext="${mech.name}"/>
+            </select>
+            <label for="endDate"><b>Repair order end date</b></label>
+            <input id="endDate" type="date" th:field="${repair.deadline}">
+            <hr>
+
+            <button type="submit">Create order</button>
+        </div>
+    </form>
+</container>
+
+<script src="js/new-order/new-order.js"/>
+</body>
+</html>

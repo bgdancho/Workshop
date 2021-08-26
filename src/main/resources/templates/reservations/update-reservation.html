@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update reservation</title>
+</head>
+<body>
+<div>Update reservation</div>
+<br>
+
+<div class="reservation">
+    <!--    <label for="reservation">Choose a date for your appointment:</label>-->
+    <!--    <input type="date" id="reservation"-->
+    <!--           name="reservation" th:field="${reservation.date}" required>-->
+    <!--    <span th:if="${#fields.hasErrors('reservation.date')}"-->
+    <!--          th:errors="${reservation.date}"></span>-->
+    <form th:action="@{/reservation/save}" th:object="${reservation}" method="post">
+        <label for="date">Date: </label>
+        <input type="text" id="id"
+               name="date" th:field="${reservation.id}" readonly/>
+
+        <input type="text" id="date"
+               name="date" th:field="${reservation.date}" readonly/>
+
+        <label for="customer">Customer name:</label>
+        <input type="text" id="customer" th:field="${reservation.customerName}"/>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="${reservation.email}"/>
+
+        <label for="phone">Phone:</label>
+        <input type="number" id="phone" th:field="${reservation.phoneNumber}"/>
+
+        <button type="submit" class="checkRes">Submit</button>
+
+    </form>
+</div>
+</body>
+</html>
