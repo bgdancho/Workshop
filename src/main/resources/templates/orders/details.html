@@ -46,7 +46,7 @@ Details for order
     </tr>
     </tbody>
 </table>
-
+<br>
 <table>
     <thead>
     <tr>
@@ -63,17 +63,33 @@ Details for order
     </tr>
     </tbody>
 </table>
-<p>Add part to this order</p>
-<form th:action="@{/repairOrder/newPart}" method="post" th:object="${order}">
-    <input type="text" th:field="${order.id}">
-    <button>Add part</button>
-</form>
 
-<p>Add operation to this order</p>
-<form th:action="@{/repairOrder/newOperation}" method="post">
-    <input type="text" th:field="${order.id}">
-    <button>Add part</button>
-</form>
+<br>
+<label for="totalPrice">Total Price:</label>
+<span th:text="${order.totalPrice}" id="totalPrice"></span>
+<div  th:if="${order.status =='STARTED'}">
+    <p>Add part to this order</p>
+    <form th:action="@{/repairOrder/newPart}" method="post" th:object="${order}">
+        <input type="text" th:field="${order.id}">
+        <button>Add part</button>
+    </form>
+</div>
+
+<div th:if="${order.status =='STARTED'}">
+    <p>Add operation to this order</p>
+    <form th:action="@{/repairOrder/newOperation}" method="post">
+        <input type="text" th:field="${order.id}">
+        <button >Add part</button>
+    </form>
+</div>
+
+<div th:if="${order.status =='STARTED'}">
+    <form th:action="@{/repairOrder/completed}" method="post">
+        <input type="text" th:field="${order.id}">
+        <button >Repair completed</button>
+    </form>
+</div>
+
 
 </body>
 </html>

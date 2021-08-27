@@ -2,15 +2,16 @@
 <head th:replace="fragments/segments :: header">
 </head>
 <body>
-<nav th:replace="fragments/segments :: nav" ></nav>
+<nav th:replace="fragments/segments :: nav"></nav>
+
 <h1>Welcome to MH Workshop</h1>
 <img th:src="@{images/engine1.jpg}" alt="Pic of an engine"/>
 <div>
     <button type="button" onclick="javascript: window.location.href='/repairOrder/new'">New repair order</button>
-    <button type="button" onclick="javascript: window.location.href='/reservation/new'">Make Reservation for repair</button>
+    <button type="button" onclick="javascript: window.location.href='/reservation/new'">Make Reservation for repair
+    </button>
     <button type="button" onclick="javascript: window.location.href='/repairOrder/allOrders'">Get all orders</button>
     <a class="button" th:href="@{/reservation/all}">Get all reservations</a>
-
 
 
 </div>

@@ -1,25 +1,28 @@
 package com.yordan.karabelyov.Workshop.model;
 
 
-import com.yordan.karabelyov.Workshop.service.SparePartService;
+
+import com.yordan.karabelyov.Workshop.util.OrderStatus;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.Operation;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 @Entity
 public class RepairOrder {
 
-
     @Id
     @GeneratedValue
     private long id;
 
-    private int totalPrice;
+    private double totalPrice;
+
+    private int hourPrice = 50;
 
     @ManyToMany
     public List<Mechanic> mechanicsWorked = new ArrayList<>();
@@ -30,7 +33,7 @@ public class RepairOrder {
     @OneToOne
     private Vehicle vehicle = new Vehicle();
 
-    private String status = "started";
+    private String status = OrderStatus.STARTED.name();
 
     @CreationTimestamp
     private Date startDate;
@@ -42,7 +45,6 @@ public class RepairOrder {
     private List<SparePart> spareParts = new ArrayList<>();
 
     public RepairOrder() {
-
     }
 
     public RepairOrder(Vehicle vehicle) {
@@ -59,6 +61,7 @@ public class RepairOrder {
         this.deadline = deadline;
         this.mechanicsWorked.add(mechanic);
     }
+
 
     public Date getDeadline() {
         return deadline;
@@ -84,11 +87,12 @@ public class RepairOrder {
         this.id = id;
     }
 
-    public int getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 
     public void setTotalPrice(int totalPrice) {
+
         this.totalPrice = totalPrice;
     }
 
@@ -138,6 +142,20 @@ public class RepairOrder {
         }
     }
 
+    public void calcTotalPrice() {
+        Double price = 0.0;
+
+        for (SparePart part : spareParts
+        ) {
+            price += part.getPrice();
+        }
+        for (VehicleOperation operation : operations
+        ) {
+            price += (operation.getHours() * hourPrice);
+        }
+
+        this.totalPrice = BigDecimal.valueOf(price).setScale(3, RoundingMode.HALF_UP).doubleValue();
+    }
 
     @Override
     public String toString() {

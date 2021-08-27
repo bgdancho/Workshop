@@ -56,5 +56,14 @@ public class RepairRepairOrderServiceImpl implements RepairOrderService {
 //        sparePartService.save(part);
         repairOrderRepository.save(repairOrder);
     }
+
+    @Override
+    @Transactional
+    public void setStatus(Long id, String status) {
+        RepairOrder repairOrder = repairOrderRepository.findById(id).get();
+        repairOrder.setStatus(status);
+        repairOrder.calcTotalPrice();
+
+    }
 }
 

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-
 @Service
 public class SparePartServiceImpl implements SparePartService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -43,7 +42,7 @@ public class SparePartServiceImpl implements SparePartService {
 
     @Override
     public SparePart findById(Long id) {
-       return sparePartRepository.findById(id).get();
+        return sparePartRepository.findById(id).get();
     }
 
     @Override
@@ -53,7 +52,7 @@ public class SparePartServiceImpl implements SparePartService {
 
     @Override
     public boolean exists(int code) {
-        if (sparePartRepository.findByCode(code) != null){
+        if (sparePartRepository.findByCode(code) != null) {
             return true;
         }
         return false;
@@ -61,6 +60,12 @@ public class SparePartServiceImpl implements SparePartService {
 
     @Override
     public void save(SparePart part) {
+        if (sparePartRepository.existsById(part.getId())) {
+            SparePart sparePart = sparePartRepository.getById(part.getId());
+            sparePart.setCode(part.getCode());
+            sparePart.setPrice(part.getPrice());
+            sparePart.setName(part.getName());
+        }
         sparePartRepository.save(part);
     }
 }
