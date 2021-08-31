@@ -48,7 +48,6 @@ public class CarWorkshopApplication implements CommandLineRunner {
         Vehicle testVehicle1 = new Vehicle("12345678912345678", "ca 1112 ca");
 
 
-
         vehicleService.saveVehicle(testVehicle);
         vehicleService.saveVehicle(testVehicle1);
 
@@ -80,18 +79,19 @@ public class CarWorkshopApplication implements CommandLineRunner {
         Vehicle vehicle = new Vehicle("1234567891111111");
         vehicle.setLicensePlate("sa0001ng");
 
-        RepairOrder repairOrder = new RepairOrder(vehicle);SparePart sparePart2 = sparePartService.findById(2L);
+//        RepairOrder repairOrder = new RepairOrder(vehicle);
+        SparePart sparePart2 = sparePartService.findById(2L);
 
-       repairOrder.addPart(sparePart);
-       repairOrder.addPart(sparePart2);
+//        repairOrder.addPart(sparePart);
+//        repairOrder.addPart(sparePart2);
 
         RepairOrder repairOrder1 = new RepairOrder(testVehicle);
 
-       repairOrder1.addPart(sparePart1);
-       repairOrder1.addPart(sparePart2);
+        repairOrder1.addPart(sparePart1);
+        repairOrder1.addPart(sparePart2);
 
         repairOrderService.save(repairOrder1);
-        repairOrderService.save(repairOrder);
+//        repairOrderService.save(repairOrder);
         vehicleService.saveVehicle(vehicle);
 
     }

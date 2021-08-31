@@ -13,6 +13,7 @@ public class VehicleOperationServiceImpl implements VehicleOperationService{
 
     @Override
     public void save(VehicleOperation operation) {
+
         vehicleOperationRepository.save(operation);
     }
 }

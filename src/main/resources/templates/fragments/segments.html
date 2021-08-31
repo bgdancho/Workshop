@@ -13,8 +13,6 @@
 
 </head>
 <body>
-
-</body>
 </html>
 <nav th:fragment="navbar">
     <a th:href="@{/}">Home</a>
@@ -32,12 +30,10 @@
         <button class="dropbtn">Orders management</button>
         <div class="dropdown-content">
             <a th:href="@{/repairOrder/management/completedOrders}">Completed</a>
-            <a th:href="@{/parts/management/ordersByCustomer}">Not completed</a>
-            <a th:href="@{/parts/management/ordersByDate}">Date Started</a>
+            <a th:href="@{/repairOrder/management/notCompletedOrders}">Not completed</a>
+            <a th:href="@{/repairOrder/management/ordersByDate}">Date Started</a>
             <a th:href="@{/parts/management/ordersByVehicle}">By Vehicle</a>
             <a th:href="@{/parts/management/ordersByCustomer}">By Customer</a>
-
-
 
         </div>
     </div>
@@ -45,3 +41,4 @@
 
 
 </nav>
+</body>

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -123,7 +124,7 @@ public class RepairController {
         RepairOrder order = repairOrderService.findById(repairOrder.getId());
 
         vehicleOperationService.save(operation);
-        order.operations.add(operation);
+        order.addOperation(operation);
 
         repairOrderService.save(order);
         model.addAttribute("order", repairOrderService.findById(order.getId()));
@@ -147,11 +148,11 @@ public class RepairController {
     public String completedOrders(Model model) {
 
         List<RepairOrder> completedOrders = repairOrderService.completed();
-        if (completedOrders.isEmpty()){
-            model.addAttribute("found","false");
+        if (completedOrders.isEmpty()) {
+            model.addAttribute("found", "false");
             return "orders/management/completed-orders";
         }
-        model.addAttribute("found","true");
+        model.addAttribute("found", "true");
         model.addAttribute("completed", completedOrders);
         return "orders/management/completed-orders";
     }
@@ -159,14 +160,36 @@ public class RepairController {
     @GetMapping("/management/notCompletedOrders")
     public String notCompletedOrders(Model model) {
 
-        List<RepairOrder> notCompletedOrders = repairOrderService.notCompleted();
+        List<RepairOrder> notCompleted = repairOrderService.notCompleted();
+        logger.info("NOT COMPLETED => {}", notCompleted);
 
-        if (notCompletedOrders.isEmpty()){
-            model.addAttribute("message","true");
+        if (notCompleted.isEmpty()) {
+            model.addAttribute("found", "false");
             return "orders/management/not-completed-orders";
         }
-        model.addAttribute("notCompleted", notCompletedOrders);
+        model.addAttribute("found", "true");
+        model.addAttribute("notCompleted", notCompleted);
         return "orders/management/not-completed-orders";
+    }
+
+    @GetMapping("/management/ordersByDate")
+    public String ordersByDate(Model model) {
+
+        List<RepairOrder> allByStartDate = repairOrderService.findAllOrders();
+        if (allByStartDate.isEmpty()) {
+            model.addAttribute("found", "false");
+            return "orders/management/by-start-date-orders";
+        }
+        allByStartDate.sort(new Comparator<RepairOrder>() {
+            @Override
+            public int compare(RepairOrder order1, RepairOrder order2) {
+                return order1.getStartDate().compareTo(order2.getStartDate());
+            }
+        });
+
+        model.addAttribute("found", "true");
+        model.addAttribute("orders", allByStartDate);
+        return "orders/management/by-start-date-orders";
     }
 
 

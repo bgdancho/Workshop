@@ -2,6 +2,7 @@ package com.yordan.karabelyov.Workshop.model;
 
 
 import com.yordan.karabelyov.Workshop.util.OrderStatus;
+import jdk.dynalink.Operation;
 import org.hibernate.annotations.CreationTimestamp;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -40,7 +41,7 @@ public class RepairOrder {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date deadline;
 
-   @ManyToMany(cascade = CascadeType.DETACH)
+   @ManyToMany
     private List<SparePart> spareParts = new ArrayList<>();
 
     public RepairOrder() {
@@ -138,8 +139,17 @@ public class RepairOrder {
     public void addPart(SparePart sparePart) {
         if (sparePart != null) {
             spareParts.add(sparePart);
+            calcTotalPrice();
         }
     }
+
+    public void addOperation(VehicleOperation operation) {
+        if (operation != null) {
+            operations.add(operation);
+            calcTotalPrice();
+        }
+    }
+
 
     public void calcTotalPrice() {
         Double price = 0.0;
