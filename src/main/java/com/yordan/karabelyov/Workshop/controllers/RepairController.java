@@ -118,9 +118,6 @@ public class RepairController {
     @PostMapping("/addOperation")
     public String addOperation(RepairOrder repairOrder, VehicleOperation operation, Model model) {
 
-        logger.info("RO ID => {}", repairOrder);
-        logger.info("VO ID => {}", operation);
-
         RepairOrder order = repairOrderService.findById(repairOrder.getId());
 
         vehicleOperationService.save(operation);
@@ -175,21 +172,32 @@ public class RepairController {
     @GetMapping("/management/ordersByDate")
     public String ordersByDate(Model model) {
 
-        List<RepairOrder> allByStartDate = repairOrderService.findAllOrders();
+        List<RepairOrder> allByStartDate = repairOrderService.orderByStartDate();
         if (allByStartDate.isEmpty()) {
             model.addAttribute("found", "false");
             return "orders/management/by-start-date-orders";
         }
-        allByStartDate.sort(new Comparator<RepairOrder>() {
-            @Override
-            public int compare(RepairOrder order1, RepairOrder order2) {
-                return order1.getStartDate().compareTo(order2.getStartDate());
-            }
-        });
 
         model.addAttribute("found", "true");
         model.addAttribute("orders", allByStartDate);
         return "orders/management/by-start-date-orders";
+    }
+
+    @GetMapping("/management/ordersByVehicle")
+    public String ordersByVehicle(Model model) {
+        model.addAttribute("vehicle", new Vehicle());
+        return "orders/management/by-vehicle-orders";
+    }
+    @PostMapping("/management/ordersByVehicleResult")
+    public String ordersByVehicleResult(Vehicle vehicle,Model model) {
+        List<RepairOrder> repairOrders = repairOrderService.ordersByVehicleLicensePlate(vehicle.getLicensePlate());
+        if (repairOrders.isEmpty()){
+            model.addAttribute("found","false");
+            return "orders/management/byVehicleResultOrders";
+        }
+        model.addAttribute("orders", repairOrders);
+        model.addAttribute("found", "true");
+        return "orders/management/byVehicleResultOrders";
     }
 
 

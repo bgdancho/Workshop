@@ -2,6 +2,7 @@ package com.yordan.karabelyov.Workshop.service;
 
 import com.yordan.karabelyov.Workshop.model.RepairOrder;
 import com.yordan.karabelyov.Workshop.model.SparePart;
+import com.yordan.karabelyov.Workshop.model.Vehicle;
 import com.yordan.karabelyov.Workshop.repository.RepairOrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,6 +26,8 @@ public class RepairRepairOrderServiceImpl implements RepairOrderService {
     EntityManager entityManager;
     @Autowired
     SparePartService sparePartService;
+    @Autowired
+    VehicleService vehicleService;
 
     @Override
     public RepairOrder save(RepairOrder repairOrder) {
@@ -82,6 +87,18 @@ public class RepairRepairOrderServiceImpl implements RepairOrderService {
     @Override
     public List<RepairOrder> orderByStartDate() {
         return repairOrderRepository.orderByStartDate();
+    }
+
+    @Override
+    public List<RepairOrder> ordersByVehicleLicensePlate(String licensePlate) {
+        List<Vehicle> vehicles = vehicleService.findByLicensePlateContaining(licensePlate);
+        List<RepairOrder> repairOrders = new ArrayList<>();
+        for (Vehicle vehicle :
+                vehicles) {
+          repairOrders.addAll(repairOrderRepository.findByVehicleId(vehicle.getId()));  ;
+        }
+        logger.info("LIST OF REPAIR ORDERS =? {}", repairOrders);
+        return repairOrders;
     }
 }
 

@@ -49,6 +49,9 @@ public class Vehicle {
         this.licensePlate = licensePlate;
     }
 
+    public Long getId() {
+        return id;
+    }
 
     public String getVin() {
         return vin;

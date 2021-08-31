@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @SpringBootApplication
 public class CarWorkshopApplication implements CommandLineRunner {
@@ -76,23 +77,20 @@ public class CarWorkshopApplication implements CommandLineRunner {
         sparePart1.sellStock(3);
 
 
-        Vehicle vehicle = new Vehicle("1234567891111111");
-        vehicle.setLicensePlate("sa0001ng");
 
-//        RepairOrder repairOrder = new RepairOrder(vehicle);
         SparePart sparePart2 = sparePartService.findById(2L);
 
-//        repairOrder.addPart(sparePart);
-//        repairOrder.addPart(sparePart2);
-
         RepairOrder repairOrder1 = new RepairOrder(testVehicle);
+        RepairOrder repairOrder2 = new RepairOrder(testVehicle1);
 
         repairOrder1.addPart(sparePart1);
         repairOrder1.addPart(sparePart2);
-
+        repairOrderService.save(repairOrder2);
         repairOrderService.save(repairOrder1);
-//        repairOrderService.save(repairOrder);
-        vehicleService.saveVehicle(vehicle);
 
+
+        List<Vehicle> vehicles = vehicleService.findByLicensePlateContaining("1");
+        logger.info("VEHICLES {}", vehicles);
+        repairOrderService.ordersByVehicleLicensePlate("1");
     }
 }
