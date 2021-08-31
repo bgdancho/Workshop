@@ -40,7 +40,7 @@ public class RepairOrder {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date deadline;
 
-    @ManyToMany
+   @ManyToMany(cascade = CascadeType.DETACH)
     private List<SparePart> spareParts = new ArrayList<>();
 
     public RepairOrder() {

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 @Service
@@ -19,12 +20,15 @@ public class RepairRepairOrderServiceImpl implements RepairOrderService {
     @Autowired
     RepairOrderRepository repairOrderRepository;
     @Autowired
+    EntityManager entityManager;
+    @Autowired
     SparePartService sparePartService;
 
     @Override
     public RepairOrder save(RepairOrder repairOrder) {
 
         repairOrder.setDeadline(repairOrder.getDeadline());
+        entityManager.detach(repairOrder);
         return repairOrderRepository.save(repairOrder);
     }
 

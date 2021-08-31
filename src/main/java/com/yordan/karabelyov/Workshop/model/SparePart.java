@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 @Entity
-@SQLDelete(sql = "UPDATE spare_part SET deleted = true WHERE id=?")
-@Where(clause = "deleted=false")
+//@SQLDelete(sql = "UPDATE spare_part SET deleted = true WHERE id=?")
+//@Where(clause = "deleted=false")
 public class SparePart {
 
     @Id
@@ -30,7 +30,7 @@ public class SparePart {
 
     private double price;
 
-    private boolean deleted = false;
+//    private boolean deleted = false;
 
     @ManyToMany(mappedBy = "spareParts")
     private List<RepairOrder> repairOrders = new ArrayList<>();
@@ -117,13 +117,13 @@ public class SparePart {
         this.inStock = inStock;
     }
 
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        deleted = deleted;
-    }
+//    public boolean isDeleted() {
+//        return deleted;
+//    }
+//
+//    public void setDeleted(boolean deleted) {
+//        deleted = deleted;
+//    }
 
     public void addStock(int amount) {
         if (amount > 0) {
