@@ -6,7 +6,8 @@
 <nav th:replace="fragments/segments :: nav"></nav>
 
 <h1>Completed Orders</h1>
-<table>
+<span th:if="${found == 'false'}">No results found</span>
+<table th:if="${found == 'true'}">
     <thead>
     <tr>
         <th>Order Id</th>

@@ -11,8 +11,8 @@
 </head>
 <body>
 <nav th:replace="fragments/segments :: nav"></nav>
-
-<table>
+<span th:if="${found == 'false'}">No results found</span>
+<table th:if="${found == 'true'}">
     <thead>
     <tr>
         <th>ID</th>

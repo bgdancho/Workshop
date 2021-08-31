@@ -62,6 +62,11 @@ public class ReservationController {
     public String getAllReservations(Model model) {
 
         List<Reservation> allReservations = reservationService.allReservations();
+        if (allReservations.isEmpty()){
+            model.addAttribute("found", "false");
+            return "reservations/all-reservations";
+        }
+        model.addAttribute("found", "true");
         model.addAttribute("reservations", allReservations);
         model.addAttribute("toUpdate", new Reservation());
 

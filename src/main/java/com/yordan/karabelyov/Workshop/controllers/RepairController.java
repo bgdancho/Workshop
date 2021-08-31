@@ -148,19 +148,21 @@ public class RepairController {
 
         List<RepairOrder> completedOrders = repairOrderService.completed();
         if (completedOrders.isEmpty()){
-            model.addAttribute("message","No results found");
+            model.addAttribute("found","false");
             return "orders/management/completed-orders";
         }
+        model.addAttribute("found","true");
         model.addAttribute("completed", completedOrders);
         return "orders/management/completed-orders";
     }
+
     @GetMapping("/management/notCompletedOrders")
     public String notCompletedOrders(Model model) {
 
         List<RepairOrder> notCompletedOrders = repairOrderService.notCompleted();
 
         if (notCompletedOrders.isEmpty()){
-            model.addAttribute("message","No results found");
+            model.addAttribute("message","true");
             return "orders/management/not-completed-orders";
         }
         model.addAttribute("notCompleted", notCompletedOrders);
