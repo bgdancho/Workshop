@@ -12,5 +12,9 @@ public interface RepairOrderService {
     RepairOrder findById(Long id);
     void insertSparePart(RepairOrder order, SparePart part);
     void setStatus(Long id,String status);
+    List<RepairOrder> completed();
+    List<RepairOrder> notCompleted();
+    List<RepairOrder> orderByStartDate();
+
 
 }

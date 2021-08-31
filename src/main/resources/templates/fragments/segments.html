@@ -28,6 +28,19 @@
             <a th:href="@{/parts/management/delete}">Delete part</a>
         </div>
     </div>
+    <div class="dropdown">
+        <button class="dropbtn">Orders management</button>
+        <div class="dropdown-content">
+            <a th:href="@{/repairOrder/management/completedOrders}">Completed</a>
+            <a th:href="@{/parts/management/ordersByCustomer}">Not completed</a>
+            <a th:href="@{/parts/management/ordersByDate}">Date Started</a>
+            <a th:href="@{/parts/management/ordersByVehicle}">By Vehicle</a>
+            <a th:href="@{/parts/management/ordersByCustomer}">By Customer</a>
+
+
+
+        </div>
+    </div>
     <a class="contact" th:href="@{/contacts}">Contacts</a>
 
 

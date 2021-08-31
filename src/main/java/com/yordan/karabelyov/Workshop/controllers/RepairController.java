@@ -3,6 +3,7 @@ package com.yordan.karabelyov.Workshop.controllers;
 import com.yordan.karabelyov.Workshop.model.*;
 import com.yordan.karabelyov.Workshop.service.*;
 import com.yordan.karabelyov.Workshop.util.OrderStatus;
+import org.dom4j.rule.Mode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,5 +143,29 @@ public class RepairController {
         return new ModelAndView("redirect:/");
     }
 
+    @GetMapping("/management/completedOrders")
+    public String completedOrders(Model model) {
+
+        List<RepairOrder> completedOrders = repairOrderService.completed();
+        if (completedOrders.isEmpty()){
+            model.addAttribute("message","No results found");
+            return "orders/management/completed-orders";
+        }
+        model.addAttribute("completed", completedOrders);
+        return "orders/management/completed-orders";
+    }
+    @GetMapping("/management/notCompletedOrders")
+    public String notCompletedOrders(Model model) {
+
+        List<RepairOrder> notCompletedOrders = repairOrderService.notCompleted();
+
+        if (notCompletedOrders.isEmpty()){
+            model.addAttribute("message","No results found");
+            return "orders/management/not-completed-orders";
+        }
+        model.addAttribute("notCompleted", notCompletedOrders);
+        return "orders/management/not-completed-orders";
+    }
+
+
 }
-//	55634

@@ -67,7 +67,21 @@ public class RepairRepairOrderServiceImpl implements RepairOrderService {
         RepairOrder repairOrder = repairOrderRepository.findById(id).get();
         repairOrder.setStatus(status);
         repairOrder.calcTotalPrice();
+    }
 
+    @Override
+    public List<RepairOrder> completed() {
+        return repairOrderRepository.completed();
+    }
+
+    @Override
+    public List<RepairOrder> notCompleted() {
+        return repairOrderRepository.notCompleted();
+    }
+
+    @Override
+    public List<RepairOrder> orderByStartDate() {
+        return repairOrderRepository.orderByStartDate();
     }
 }
 

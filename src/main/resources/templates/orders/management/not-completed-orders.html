@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/segments :: header">
+</head>
+<body>
+<nav th:replace="fragments/segments :: nav"></nav>
+
+<h1>Not Completed Orders</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Order Id</th>
+        <th>Vehicle VIN</th>
+        <th>Model</th>
+        <th>Engine</th>
+        <th>License Plate</th>
+        <th>Mechanics Worked</th>
+        <th></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${completed}">
+        <td th:text="${order.id}"/>
+        <td th:text="${order.vehicle.vin}"/>
+        <td th:text="${order.vehicle.model}"/>
+        <td th:text="${order.vehicle.engineSize}"/>
+        <td th:text="${order.vehicle.licensePlate}"/>
+        <td>
+            <p th:each="mechanic : ${order.mechanicsWorked}">
+                <span th:text="${mechanic.name}">name</span>
+            </p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
