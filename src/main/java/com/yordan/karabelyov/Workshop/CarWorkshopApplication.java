@@ -80,16 +80,15 @@ public class CarWorkshopApplication implements CommandLineRunner {
         Vehicle vehicle = new Vehicle("1234567891111111");
         vehicle.setLicensePlate("sa0001ng");
 
-        RepairOrder repairOrder = new RepairOrder(vehicle);
-        SparePart sparePart2 = sparePartService.findById(2L);
+        RepairOrder repairOrder = new RepairOrder(vehicle);SparePart sparePart2 = sparePartService.findById(2L);
 
-        repairOrder.addPart(sparePart);
-        repairOrder.addPart(sparePart2);
+       repairOrder.addPart(sparePart);
+       repairOrder.addPart(sparePart2);
 
         RepairOrder repairOrder1 = new RepairOrder(testVehicle);
 
-        repairOrder1.addPart(sparePart1);
-        repairOrder1.addPart(sparePart2);
+       repairOrder1.addPart(sparePart1);
+       repairOrder1.addPart(sparePart2);
 
         repairOrderService.save(repairOrder1);
         repairOrderService.save(repairOrder);

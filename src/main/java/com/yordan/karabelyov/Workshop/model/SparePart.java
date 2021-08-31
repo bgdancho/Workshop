@@ -1,13 +1,20 @@
 package com.yordan.karabelyov.Workshop.model;
 
+
+import org.hibernate.annotations.*;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Entity
+@SQLDelete(sql = "UPDATE spare_part SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 public class SparePart {
 
     @Id
@@ -15,13 +22,15 @@ public class SparePart {
     private long id;
 
     private String name;
-
-    @Column(nullable = false)
+    @NotNull
+    @Column(unique = true)
     private int code;
 
     private int inStock;
 
     private double price;
+
+    private boolean deleted = false;
 
     @ManyToMany(mappedBy = "spareParts")
     private List<RepairOrder> repairOrders = new ArrayList<>();
@@ -106,6 +115,14 @@ public class SparePart {
 
     public void setInStock(int inStock) {
         this.inStock = inStock;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        deleted = deleted;
     }
 
     public void addStock(int amount) {

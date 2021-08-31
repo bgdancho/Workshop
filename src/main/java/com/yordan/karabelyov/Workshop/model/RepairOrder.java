@@ -1,7 +1,6 @@
 package com.yordan.karabelyov.Workshop.model;
 
 
-
 import com.yordan.karabelyov.Workshop.util.OrderStatus;
 import org.hibernate.annotations.CreationTimestamp;
 

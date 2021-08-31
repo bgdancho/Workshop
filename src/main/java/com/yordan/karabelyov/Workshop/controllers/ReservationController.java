@@ -56,8 +56,6 @@ public class ReservationController {
         }
         reservationService.save(reservation);
         return "redirect:/";
-
-
     }
 
     @GetMapping("/all")

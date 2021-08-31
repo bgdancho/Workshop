@@ -23,9 +23,9 @@
     <div class="dropdown">
         <button class="dropbtn">Parts management</button>
         <div class="dropdown-content">
-            <a href="#">Add part</a>
+            <a th:href="@{/parts/management/newPart}">Add part</a>
             <a th:href="@{/parts/management/searchPart}">Edit part</a>
-            <a href="#">Delete part</a>
+            <a th:href="@{/parts/management/delete}">Delete part</a>
         </div>
     </div>
     <a class="contact" th:href="@{/contacts}">Contacts</a>

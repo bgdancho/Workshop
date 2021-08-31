@@ -3,7 +3,6 @@ package com.yordan.karabelyov.Workshop.controllers;
 import com.yordan.karabelyov.Workshop.model.*;
 import com.yordan.karabelyov.Workshop.service.*;
 import com.yordan.karabelyov.Workshop.util.OrderStatus;
-import com.yordan.karabelyov.Workshop.util.PartExist;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,11 +44,6 @@ public class RepairController {
     @PostMapping("/save")
     public String saveRepairOrder(Vehicle vehicle, Mechanic mechanic, Model model, RepairOrder repairOrder) {
 
-        logger.info("Received info Date => {}", repairOrder.getDeadline());
-        logger.info("Received info vehicle=> {}", vehicle);
-        logger.info("Received info mechanic => {}", mechanic);
-
-
         mechanicService.save(mechanic);
         vehicleService.saveVehicle(vehicle);
         repairOrderService.save(new RepairOrder(mechanic, vehicle, repairOrder.getDeadline()));
@@ -67,7 +61,7 @@ public class RepairController {
 
     @PostMapping("/details")
     public String detailsForOrder(RepairOrder order, Model model) {
-        logger.info("REPAIR ORDER =====> {}", order);
+
         RepairOrder orderFromDb = repairOrderService.findById(order.getId());
         VehicleOperation vehicleOperation = new VehicleOperation();
 
@@ -77,9 +71,8 @@ public class RepairController {
 
     @PostMapping("/newPart")
     public String addNewPart(RepairOrder repairOrder, Model model) {
-        logger.info("Repair order in newPart => {}", repairOrder);
-        SparePart part = new SparePart();
-        model.addAttribute("part", part);
+
+        model.addAttribute("part", new SparePart());
         model.addAttribute("order", repairOrder);
         return "/parts/add-part";
     }
@@ -87,7 +80,6 @@ public class RepairController {
     @PostMapping("/searchPart")
     public String searchPart(RepairOrder order, SparePart part, Model model) {
 
-        logger.info("Order number is search part => {}", order);
 
         SparePart sparePart = sparePartService.findByCode(part.getCode());
 
@@ -101,16 +93,14 @@ public class RepairController {
 
     @PostMapping("/insertPart")
     public String insertPart(RepairOrder order, SparePart part, Model model) {
-
-        logger.info("Repair order => {}", order);
-        logger.info("Spare part => {}", part.toString());
-
-
+        if (part.getInStock() == 0) {
+            model.addAttribute("error", "Not enough in stock !");
+            model.addAttribute("part", part);
+            model.addAttribute("order", order);
+            return "/parts/found-part";
+        }
         repairOrderService.insertSparePart(order, part);
-
         model.addAttribute("order", repairOrderService.findById(order.getId()));
-
-
         return "/orders/details";
     }
 
@@ -126,7 +116,7 @@ public class RepairController {
     @PostMapping("/addOperation")
     public String addOperation(RepairOrder repairOrder, VehicleOperation operation, Model model) {
 
-        logger.info("RO ID => {}",repairOrder);
+        logger.info("RO ID => {}", repairOrder);
         logger.info("VO ID => {}", operation);
 
         RepairOrder order = repairOrderService.findById(repairOrder.getId());
@@ -139,10 +129,11 @@ public class RepairController {
 
         return "/orders/details";
     }
+
     @PostMapping("/completed")
     public ModelAndView completeOrder(RepairOrder repairOrder) {
 
-        logger.info("RO for completion ID => {}",repairOrder);
+        logger.info("RO for completion ID => {}", repairOrder);
 
         RepairOrder order = repairOrderService.findById(repairOrder.getId());
 

@@ -9,7 +9,7 @@
 <div th:if="${param.error}">
     Invalid username and password.
 </div>
-<form th:action="@{/reservation/saved}" method="post">
+<form th:action="@{/reservation/saved}" th:object="${reservation}" method="post" >
     <h2>Create your reservation</h2>
     <br>
 
@@ -17,13 +17,9 @@
         <label for="reservation">Choose a date for your appointment:</label>
         <input type="date" id="reservation"
                name="reservation" th:field="${reservation.date}" required>
-        <span th:if="${#fields.hasErrors('reservation.date')}"
+        <span th:if="${#fields.hasErrors('date')}"
               th:errors="${reservation.date}"></span>
     </div>
-    <!--    -->
-    <!--    <label for="date">Date: </label>-->
-    <!--    <input type="text" id="date"-->
-    <!--           name="date" th:field="${reservation.date}" readonly/>-->
 
     <label for="customer">Customer name:</label>
     <input type="text" id="customer" th:field="${reservation.customerName}"/>

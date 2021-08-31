@@ -30,9 +30,8 @@ public class SparePartServiceImpl implements SparePartService {
     @Override
     public void delete(SparePart part) {
         if (sparePartRepository.existsById(part.getId())) {
-            sparePartRepository.delete(part);
+            sparePartRepository.deleteById(part.getId());
         }
-
     }
 
     @Override

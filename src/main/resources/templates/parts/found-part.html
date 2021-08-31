@@ -17,6 +17,8 @@
         <label for="inStock"><b>In Stock:</b></label>
         <input type="text" minlength="1" maxlength="10" name="inStock" id="inStock"
                th:field="${part.inStock}" readonly>
+        <span th:if="${error}"
+              th:text="${error}">Error</span>
 
         <label for="name"><b>Type:</b></label>
         <input type="text" minlength="1" maxlength="10" name="name" id="name"
