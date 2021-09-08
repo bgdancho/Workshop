@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link th:href="@{css/login.css}" rel="stylesheet">
-    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css"/>
-</head>
+<head th:replace="fragments/segments :: head"/>
 <body>
-<nav th:replace="fragments/segments :: nav" ></nav>
+<header th:replace="fragments/segments :: nav"/>
+
+
 <div th:if="${param.error}">
     Invalid username and password.
 </div>
@@ -19,5 +18,11 @@
     <div><label> Password: <input type="password" name="password"/> </label></div>
     <div><input type="submit" value="Sign In"/></div>
 </form>
+
+
+
+
+<script type="text/javascript" th:src="@{/js/home_script.js}"></script>
+
 </body>
 </html>

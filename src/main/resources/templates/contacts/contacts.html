@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/segments :: header">
-</head>
+<head th:replace="fragments/segments :: head"/>
 <body>
-<nav th:replace="fragments/segments :: nav"></nav>
+<header th:replace="fragments/segments :: nav"/>
 <div class="mapouter">
     <div class="gmap_canvas">
         <iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
@@ -23,6 +22,7 @@
     <p>Reception : 0882 882 882</p>
 
 </div>
+<script type="text/javascript" th:src="@{/js/home_script.js}"></script>
 
 </body>
 </html>

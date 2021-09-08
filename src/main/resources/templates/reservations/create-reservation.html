@@ -1,37 +1,74 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
-<head th:replace="fragments/segments :: header">
-    <script type="text/javascript" th:src="@{js/new-reservation.js}"/>
-</head>
+<head th:replace="fragments/segments :: head"/>
 <body>
-<nav th:replace="fragments/segments :: nav"></nav>
+<header th:replace="fragments/segments :: nav"/>
 
 <div th:if="${param.error}">
     Invalid username and password.
 </div>
-<form th:action="@{/reservation/saved}" th:object="${reservation}" method="post" >
-    <h2>Create your reservation</h2>
-    <br>
+<body>
+<div class="flex-col flex-jc-c flex-ai-c">
+    <form
+            class="flex-col flex-ai-c"
+            th:action="@{/reservation/saved}"
+            th:object="${reservation}"
+            method="post"
+    >
+        <div>
+            <h1>Create your reservation, fill the fields bellow</h1>
+        </div>
 
-    <div class="reservation">
-        <label for="reservation">Choose a date for your appointment:</label>
-        <input type="date" id="reservation"
-               name="reservation" th:field="${reservation.date}" required>
-        <span th:if="${#fields.hasErrors('date')}"
-              th:errors="${reservation.date}"></span>
-    </div>
+        <div class="input__new-order">
+            <label for="reservation">Date:</label>
+            <input
+                    class="input__field"
+                    type="date"
+                    id="reservation"
+                    name="reservation"
+                    th:field="${reservation.date}"
+                    required
+            />
+        </div>
+        <div class="input__new-order">
+          <span
+                  th:if="${#fields.hasErrors('date')}"
+                  th:errors="${reservation.date}"
+          ></span>
+        </div>
+        <div class="input__new-order">
+            <label for="customer">Customer name:</label>
+            <input
+                    class="input__field"
+                    type="text"
+                    id="customer"
+                    th:field="${reservation.customerName}"
+            />
+        </div>
 
-    <label for="customer">Customer name:</label>
-    <input type="text" id="customer" th:field="${reservation.customerName}"/>
+        <div class="input__new-order">
+            <label for="email">Email:</label>
+            <input
+                    class="input__field"
+                    type="email"
+                    id="email"
+                    th:field="${reservation.email}"
+            />
+        </div>
+        <div class="input__new-order">
+            <label for="phone">Phone:</label>
+            <input
+                    class="input__field"
+                    id="phone"
+                    th:field="${reservation.phoneNumber}"
+            />
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</div>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" th:field="${reservation.email}"/>
-
-    <label for="phone">Phone:</label>
-    <input id="phone" th:field="${reservation.phoneNumber}"/>
-
-    <button type="submit" class="checkRes">Submit</button>
-
-</form>
+<script type="text/javascript" th:src="@{/js/home_script.js}"></script>
 </body>
 </html>

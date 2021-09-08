@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/segments :: header">
-</head>
+<head th:replace="fragments/segments :: head"/>
 <body>
-<nav th:replace="fragments/segments :: nav"></nav>
+<header th:replace="fragments/segments :: nav"/>
 
 <form th:action="@{/repairOrder/insertPart}" th:object="${part}" method="post">
     <div class="container">
@@ -34,6 +33,7 @@
         <button>Add to Repair order</button>
     </div>
 </form>
+<script type="text/javascript" th:src="@{/js/home_script.js}"></script>
 
 </body>
 </html>

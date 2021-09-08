@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/segments :: header">
-</head>
+<head th:replace="fragments/segments :: head"></head>
 <body>
-<nav th:replace="fragments/segments :: nav" ></nav>
+<header th:replace="fragments/segments :: header" class="header"></header>
 
-<h1>Repairing your vehicle since 1984 !</h1>
+<p class="about__text" style="text-align:center">Repairing your vehicle since 1984 !</p>
+
+
+
+
+
+
+<script type="text/javascript" th:src="@{/js/home_script.js}"></script>
+
 </body>
 </html>

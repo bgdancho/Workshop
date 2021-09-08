@@ -1,50 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/segments :: header">
-</head>
+<head th:replace="fragments/segments :: head"/>
 <body>
-<nav th:replace="fragments/segments :: nav"></nav>
+<header th:replace="fragments/segments :: nav"/>
 
+<h1>Orders by starting date</h1>
 <span th:if="${found == 'false'}">No results found</span>
-<table th:if="${found == 'true'}">
-    <thead>
-    <tr>
-        <th>Order Id</th>
-        <th>Order status</th>
-        <th>Vehicle VIN</th>
-        <th>Model</th>
-        <th>Engine</th>
-        <th>License Plate</th>
-        <th>Mechanics Worked</th>
-        <th>Start date</th>
-        <th></th>
 
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="order : ${orders}">
-        <td th:text="${order.id}"/>
-        <td th:text="${order.status}"/>
-        <td th:text="${order.vehicle.vin}"/>
-        <td th:text="${order.vehicle.model}"/>
-        <td th:text="${order.vehicle.engineSize}"/>
-        <td th:text="${order.vehicle.licensePlate}"/>
-        <td>
-            <p th:each="mechanic : ${order.mechanicsWorked}">
-                <span th:text="${mechanic.name}">name</span>
-            </p>
-        </td>
-        <td th:text="${order.startDate}"/>
-        <td>
-            <form th:action="@{/repairOrder/details}" method="POST" th:object="${repairOrder}">
-                <input type="hidden" name="id" th:value="${order.id}"/>
-                <button type="submit">Details</button>
-            </form>
-        </td>
+<div class="flex flex-jc-c flex-ai-c">
+    <table th:if="${found == 'true'}">
+        <thead>
+        <tr>
+            <th>Order Id</th>
+            <th>Order status</th>
+            <th>Vehicle VIN</th>
+            <th>Model</th>
+            <th>Engine</th>
+            <th>License Plate</th>
+            <th>Mechanics Worked</th>
+            <th>Start date</th>
+            <th></th>
 
-    </tr>
-    </tbody>
-</table>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.id}"/>
+            <td th:text="${order.status}"/>
+            <td th:text="${order.vehicle.vin}"/>
+            <td th:text="${order.vehicle.model}"/>
+            <td th:text="${order.vehicle.engineSize}"/>
+            <td th:text="${order.vehicle.licensePlate}"/>
+            <td>
+                <p th:each="mechanic : ${order.mechanicsWorked}">
+                    <span th:text="${mechanic.name}">name</span>
+                </p>
+            </td>
+            <td th:text="${order.startDate}"/>
+            <td>
+                <form th:action="@{/repairOrder/details}" method="POST" th:object="${repairOrder}">
+                    <input type="hidden" name="id" th:value="${order.id}"/>
+                    <button type="submit">Details</button>
+                </form>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+
+
+</div>
+
+
+
+<script type="text/javascript" th:src="@{/js/home_script.js}"></script>
 
 </body>
 </html>

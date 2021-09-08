@@ -1,52 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/segments :: header">
-</head>
+<head th:replace="fragments/segments :: head"/>
 <body>
-<nav th:replace="fragments/segments :: nav" ></nav>
+<header th:replace="fragments/segments :: nav"/>
 
-<container>
+<body>
+<div class="flex-col flex-jc-c flex-ai-c">
+    <form
+            class="flex-col flex-ai-c"
+            th:action="@{/repairOrder/save}"
+            method="post"
+    >
+        <div>
+            <h1>Please fill in the information to create a new order:</h1>
+        </div>
+        <div class="input__new-order">
+            <label for="VIN">VIN:</label>
+            <input
+                    class="input__field"
+                    type="text"
+                    placeholder="Enter VIN"
+                    minlength="13"
+                    maxlength="17"
+                    name="VIN"
+                    id="VIN"
+                    th:field="${vehicle.vin}"
+                    required
+            />
+        </div>
+        <div class="input__new-order">
+            <label for="brand">Manufacturer</label>
+            <input
+                    class="input__field"
+                    type="text"
+                    placeholder="VW, AUDI, PEUGEOT...."
+                    name="brand"
+                    id="brand"
+                    th:field="${vehicle.brand}"
+                    required
+            />
+        </div>
+        <div class="input__new-order">
+            <label for="model">Model</label>
+            <input
+                    class="input__field"
+                    type="text"
+                    placeholder="Model"
+                    name="model"
+                    id="model"
+                    th:field="${vehicle.model}"
+                    required
+            />
+        </div>
 
-    <form th:action="@{/repairOrder/save}" method="post">
-        <div class="container">
-            <h1>Please fill in this form to create a new order</h1>
-            <hr>
+        <div class="input__new-order">
+            <label for="engine">Engine</label>
+            <input
+                    class="input__field"
+                    type="text"
+                    placeholder="engine"
+                    name="engine"
+                    id="engine"
+                    th:field="${vehicle.engineSize}"
+            />
+        </div>
 
-            <label for="VIN"><b>VIN:</b></label>
-            <input type="text" placeholder="Enter VIN" minlength="13" maxlength="17" name="VIN" id="VIN"
-                   th:field="${vehicle.vin}" required>
+        <div class="input__new-order">
+            <label for="LP">License Plate</label>
+            <input
+                    class="input__field"
+                    type="text"
+                    placeholder="License Plate"
+                    name="LP"
+                    id="LP"
+                    minlength="6"
+                    maxlength="16"
+                    th:field="${vehicle.licensePlate}"
+            />
+        </div>
 
-            <label for="brand"><b>Manufacturer</b></label>
-            <input type="text" placeholder="VW, AUDI, PEUGEOT...." name="brand" id="brand" th:field="${vehicle.brand}"
-                   required>
-
-            <label for="model"><b>Model</b></label>
-            <input type="text" placeholder="Model" name="model" id="model" th:field="${vehicle.model}" required>
-
-            <label for="engine"><b>Engine</b></label>
-            <input type="text" placeholder="engine" name="engine" id="engine" th:field="${vehicle.engineSize}">
-
-            <label for="LP"><b>License Plate</b></label>
-            <input type="text" placeholder="License Plate" name="LP" id="LP" minlength="6" maxlength="16"
-                   th:field="${vehicle.licensePlate}">
-
-            <label for="mechanic"><b>Mechanic</b></label>
-<!--            <input type="text" placeholder="mechanic" name="mechanic" id="mechanic"-->
-<!--                   th:field="${mechanic.mechanicName}">-->
-            <select id="mechanic" th:field="${mechanic.id}">
-                <option th:each="mech : ${mechanicsList}"
+        <div class="input__new-order">
+            <label for="mechanic">Mechanic</label>
+            <select class="input__field" id="mechanic" th:field="${mechanic.id}">
+                <option
+                        th:each="mech : ${mechanicsList}"
                         th:value="${mech.Id}"
-                        th:utext="${mech.name}"/>
+                        th:utext="${mech.name}"
+                />
             </select>
-            <label for="endDate"><b>Repair order end date</b></label>
-            <input id="endDate" type="date" th:field="${repair.deadline}">
-            <hr>
+        </div>
 
+        <div class="input__new-order">
+            <label for="endDate">Repair order end date</label>
+            <input
+                    class="input__field"
+                    id="endDate"
+                    type="date"
+                    th:field="${repair.deadline}"
+            />
+        </div>
+        <div>
             <button type="submit">Create order</button>
         </div>
     </form>
-</container>
-
-<script src="js/new-order/new-order.js"/>
+</div>
 </body>
 </html>

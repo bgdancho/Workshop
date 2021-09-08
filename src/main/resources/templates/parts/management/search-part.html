@@ -1,22 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/segments :: header">
-</head>
+<head th:replace="fragments/segments :: head"/>
 <body>
-<nav th:replace="fragments/segments :: nav"></nav>
-
-<form th:action="@{/parts/management/editPart}" th:object="${part}" method="post">
-    <div class="container">
-        <h1>Search for part in db</h1>
-        <hr>
+<header th:replace="fragments/segments :: nav"/>>
+<body>
+<div class="flex flex-jc-c">
+    <form th:action="@{/parts/management/editPart}"
+            th:object="${part}"
+            method="post">
+        <h1 class="flex flex-jc-c">Search for part in db</h1>
 
         <label for="PartCode"><b>Part Code:</b></label>
-        <input type="text" placeholder="Part Code" minlength="1" maxlength="10" name="PartCode" id="PartCode"
-               th:field="${part.code}" required>
+        <input
+                class="input__part"
+                type="text"
+                placeholder="Part Code"
+                minlength="1"
+                maxlength="10"
+                name="PartCode"
+                id="PartCode"
+                th:field="${part.code}"
+                required
+        />
 
         <button>Search</button>
-    </div>
-</form>
+    </form>
+</div>
+</body>
+
+
+<script type="text/javascript" th:src="@{/js/home_script.js}"></script>
 
 </body>
 </html>

@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/segments :: header">
-</head>
+<head th:replace="fragments/segments :: head"/>
 <body>
-<nav th:replace="fragments/segments :: nav"></nav>
+<header th:replace="fragments/segments :: nav"/>
 
-<form th:action="@{/parts/management/save}" th:object="${part}" method="post">
-    <div class="container">
-        <h1>New spare part</h1>
+<div class="flex flex-jc-c flex-ai-c">
+    <form th:action="@{/parts/management/save}" th:object="${part}" method="post">
+
+        <h1 class="flex flex-jc-c">New spare part</h1>
 
         <label for="PartCode"><b>Part Code:</b></label>
-        <input type="text" placeholder="Part Code" minlength="1" maxlength="10" name="PartCode" id="PartCode"
+
+        <input class="input__newPart" type="text" placeholder="Part Code" minlength="1" maxlength="10" name="PartCode" id="PartCode"
                th:field="${part.code}">
         <span th:if="${error}"
               th:text="${error}">Error</span>
 
         <label for="inStock"><b>In Stock:</b></label>
-        <input type="text" minlength="1" maxlength="10" name="inStock" id="inStock"
+        <input class="input__newPart" type="text" minlength="1" maxlength="10" name="inStock" id="inStock"
                th:field="${part.inStock}">
 
         <label for="name"><b>Type:</b></label>
-        <input type="text" minlength="1" maxlength="10" name="name" id="name"
+        <input class="input__newPart" type="text" minlength="1" maxlength="10" name="name" id="name"
                th:field="${part.name}">
 
         <label for="price"><b>Price:</b></label>
-        <input type="text" minlength="1" maxlength="10" name="price" id="price"
+        <input class="input__newPart" type="text" minlength="1" maxlength="10" name="price" id="price"
                th:field="${part.price}">
 
         <button>New spare part</button>
-    </div>
-</form>
 
-</body>
-</html>
+    </form>
+</div>
+
+<script type="text/javascript" th:src="@{/js/home_script.js}"></script>
+

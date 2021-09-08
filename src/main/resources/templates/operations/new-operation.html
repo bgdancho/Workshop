@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/segments :: header">
-</head>
+<head th:replace="fragments/segments :: head"/>
 <body>
-<nav th:replace="fragments/segments :: nav"></nav>
-
+<header th:replace="fragments/segments :: nav"/>
 <h1>Please fill the fields:</h1>
 <br>
 <form th:action="@{/repairOrder/addOperation}" method="post">
@@ -29,6 +27,11 @@
         <button type="submit">Add To Order</button>
     </div>
 </form>
+
+
+
+
+<script type="text/javascript" th:src="@{/js/home_script.js}"></script>
 
 </body>
 </html>

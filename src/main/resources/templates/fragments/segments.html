@@ -1,44 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:fragment="header">
-    <meta charset="UTF-8">
-    <title>Welcome to MH Workshop</title>
-    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css"/>
+<head th:fragment="head">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <meta charset="UTF-8">
-    <title>Welcome to MH Workshop</title>
-
-
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
-</html>
-<nav th:fragment="navbar">
-    <a th:href="@{/}">Home</a>
-    <a th:href="@{/register}">Register</a>
-    <a th:href="@{/about}">About</a>
-    <div class="dropdown">
-        <button class="dropbtn">Parts management</button>
-        <div class="dropdown-content">
-            <a th:href="@{/parts/management/newPart}">Add part</a>
-            <a th:href="@{/parts/management/searchPart}">Edit part</a>
-            <a th:href="@{/parts/management/delete}">Delete part</a>
+<header th:fragment="nav" class="header">
+    <div class="overlay fade-out"></div>
+    <nav>
+        <div class="container header__links flex flex-jc-sb flex-ai-c">
+            <div class="group flex flex-jc-s">
+                <a th:href="@{/}">Home</a>
+                <a th:href="@{/register}">Register</a>
+                <a th:href="@{/about}">About</a>
+            </div>
+
+            <div class="group flex flex-jc-c">
+                <div class="header__parts">
+                    <a>Parts Management</a>
+                </div>
+                <div class="header__orders">
+                    <a>Orders Management</a>
+                </div>
+            </div>
+            <div class="group flex fl flex-jc-e">
+                <a th:href="@{/contacts}">Contacts</a>
+            </div>
         </div>
-    </div>
-    <div class="dropdown">
-        <button class="dropbtn">Orders management</button>
-        <div class="dropdown-content">
+        <div class="header__parts__menu fade-out">
+            <span class="closeParts">&#x2715</span>
+            <a th:href="@{/parts/management/newPart}">Add Spare Part</a>
+            <a th:href="@{/parts/management/searchPart}">Edit Spare Part</a>
+            <a th:href="@{/parts/management/delete}">Delete Spare Part</a>
+        </div>
+        <div class="header__orders__menu fade-out">
+            <span class="closeOrders">&#x2715</span>
             <a th:href="@{/repairOrder/management/completedOrders}">Completed</a>
-            <a th:href="@{/repairOrder/management/notCompletedOrders}">Not completed</a>
+            <a th:href="@{/repairOrder/management/notCompletedOrders}">Not Completed</a>
             <a th:href="@{/repairOrder/management/ordersByDate}">Date Started</a>
             <a th:href="@{/repairOrder/management/ordersByVehicle}">By Vehicle</a>
             <a th:href="@{/repairOrder/management/ordersByCustomer}">By Customer</a>
 
         </div>
-    </div>
-    <a class="contact" th:href="@{/contacts}">Contacts</a>
+    </nav>
+</header>
 
-
-</nav>
+<footer th:fragment="footer">
+    <script type="text/javascript" th:src="@{/js/home_script.js}"></script>
+</footer>
 </body>
+</html>

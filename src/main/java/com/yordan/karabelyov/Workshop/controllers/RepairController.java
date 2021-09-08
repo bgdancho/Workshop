@@ -56,6 +56,12 @@ public class RepairController {
     @GetMapping("/allOrders")
     public String allOrders(Model model) {
         List<RepairOrder> allOrders = repairOrderService.findAllOrders();
+        if(allOrders.isEmpty()){
+            model.addAttribute("found","false");
+            return "orders/all-orders";
+
+        }
+
         model.addAttribute("orders", allOrders);
         model.addAttribute("repairOrder", new RepairOrder());
         return "orders/all-orders";
