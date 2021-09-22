@@ -3,29 +3,38 @@
 <head th:replace="fragments/segments :: head"/>
 <body>
 <header th:replace="fragments/segments :: nav"/>
-<h1>Please fill the fields:</h1>
-<br>
-<form th:action="@{/repairOrder/addOperation}" method="post">
-    <div class="reservation">
 
+
+<div class="flex-col flex-jc-c flex-ai-c">
+<form class="flex-col flex-ai-c" th:action="@{/repairOrder/addOperation}" method="post">
+    <div>
+        <h1>Please fill the fields:</h1>
+    </div>
+    <div class="input__data">
         <label for="mechanic">Mechanics</label>
-        <select id="mechanic" th:field="${operation.mechanic}">
+        <select class="input__field" id="mechanic" th:field="${operation.mechanic}">
             <option th:each="mech : ${mechanics}"
                     th:value="${mech.Id}"
                     th:utext="${mech.name}"/>
         </select>
-
+    </div>
+    <div class="input__data">
         <label for="operationType">Operation type</label>
-        <select id="operationType" th:field="${operation.type}">
+        <select class="input__field" id="operationType" th:field="${operation.type}">
             <option th:each="type : ${T(com.yordan.karabelyov.Workshop.util.TypeOfOperation).values()}"
                     th:value="${type}"
                     th:utext="${type}"/>
         </select>
-        <label for="hours">Hours</label>
-        <input type="text" placeholder="Hours" name="hours" id="hours" th:field="${operation.hours}">
-        <input type="hidden" th:value="${order.id}" name="id">
-        <button type="submit">Add To Order</button>
     </div>
+<div class="input__data">
+    <label for="hours">Hours</label>
+    <input class="input__field" type="text" placeholder="Hours" name="hours" id="hours" th:field="${operation.hours}">
+</div>
+
+        <input type="hidden" th:value="${order.id}" name="id">
+
+    <button type="submit">Add To Order</button>
+
 </form>
 
 

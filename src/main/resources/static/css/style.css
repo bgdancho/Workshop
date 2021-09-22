@@ -53,10 +53,10 @@
 }
 
 @keyframes fade-out {
-  from {
-    visibility: visible;
-    opacity: 1;
-  }
+  /*from {*/
+  /*  visibility: visible;*/
+  /*  opacity: 1;*/
+  /*}*/
   99% {
     visibility: visible;
     opacity: 0;
@@ -204,6 +204,7 @@ a:hover {
 }
 
 .main_image {
+  z-index: 1;
   padding: 25px 20px;
   display: block;
   max-width: 80%;
@@ -217,6 +218,7 @@ a:hover {
 }
 
 .overlay {
+  z-index: 2;
   opacity: 0;
   position: fixed;
   top: 0px;
@@ -227,17 +229,7 @@ a:hover {
   background-image: linear-gradient(#2d314d, transparent);
 }
 
-.closeParts {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-item-align: end;
-      align-self: flex-end;
-  cursor: pointer;
-  font-size: 1.5rem;
-}
-
-.closeOrders {
+.closeMenu {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -249,6 +241,7 @@ a:hover {
 
 .closed {
   display: none;
+  opacity: 0;
 }
 
 h3 {
@@ -267,30 +260,34 @@ h1 {
 }
 
 table {
-  border-collapse: collapse;
-  width: 70%;
-  text-align: center;
-  padding: 10rem;
+    border-collapse: collapse;
+    text-align: center;
+    margin-top: 4rem;
 }
 
 table tr:nth-child(even) {
-  background-color: #f2f2f2;
+    background-color: #f2f2f2;
 }
 
 table tr {
-  border-bottom: 1px solid #57db7a;
+    border-bottom: 1px solid #57db7a;
 }
 
 table th {
-  background: -webkit-gradient(linear, left top, left bottom, from(#57db7a));
-  background: linear-gradient(#57db7a);
+    background: -webkit-gradient(linear, left top, left bottom, from(#57db7a));
+    background: linear-gradient(#57db7a);
 }
 
 table th,
 table td {
-  padding: 0.7rem;
+    padding: 0.7rem;
 }
 
+.table__main {
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
 .input__licensePlate {
   margin: 2rem 0.5rem;
   border-radius: 5px;
@@ -302,7 +299,7 @@ table td {
   text-align: center;
 }
 
-.input__new-order {
+.input__data {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -312,7 +309,12 @@ table td {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 50%;
+  width: 90%;
+    font-weight: 600;
+}
+
+.not-vis {
+  opacity: 0;
 }
 
 .input__newPart {
@@ -322,9 +324,12 @@ table td {
           box-shadow: 2px 1.5px #9698a6;
 }
 
+.header {
+  z-index: 3;
+}
+
 .header nav {
-  z-index: 1;
-  padding: 1.0625rem 1.5 rem;
+  margin: 1.0625rem 1.5 rem;
   height: 2.5rem;
 }
 
@@ -402,6 +407,7 @@ table td {
 }
 
 .header__parts__menu, .header__orders__menu {
+  z-index: 3;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -440,8 +446,8 @@ table td {
   margin: 1.5rem;
   border-radius: 10px;
   text-align: center;
-  -webkit-box-shadow: 2px 1.5px #9698a6;
-          box-shadow: 2px 1.5px #9698a6;
+  /*-webkit-box-shadow: 2px 1.5px #9698a6;*/
+  /*        box-shadow: 2px 1.5px #9698a6;*/
 }
 
 .input__part {
@@ -450,4 +456,47 @@ table td {
   -webkit-box-shadow: 2px 1.5px #9698a6;
           box-shadow: 2px 1.5px #9698a6;
 }
+
+.about__content {
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.error__message {
+    color: firebrick;
+}
+
+.table__sec {
+    width: 25%;
+}
+
+.price {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+    width: 85%;
+    text-align: end;
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-decoration: underline #57db7a 2px;
+    text-underline-offset: 3px;
+
+    margin-right: 13%;
+}
+.details__buttons {
+    flex-wrap: wrap;
+}
+.details__buttons > div {
+    flex: 50%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.contact__details {
+    font-weight: 600;
+    text-decoration: underline hsl(136, 65%, 60%) 2px;
+    text-underline-offset: 3px;
+
+}
+
 /*# sourceMappingURL=style.css.map */

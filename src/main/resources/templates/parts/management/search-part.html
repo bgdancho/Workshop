@@ -2,7 +2,7 @@
 <html lang="en">
 <head th:replace="fragments/segments :: head"/>
 <body>
-<header th:replace="fragments/segments :: nav"/>>
+<header th:replace="fragments/segments :: nav"/>
 <body>
 <div class="flex flex-jc-c">
     <form th:action="@{/parts/management/editPart}"
@@ -10,7 +10,7 @@
             method="post">
         <h1 class="flex flex-jc-c">Search for part in db</h1>
 
-        <label for="PartCode"><b>Part Code:</b></label>
+        <label for="PartCode">Part Code:</label>
         <input
                 class="input__part"
                 type="text"
@@ -26,8 +26,9 @@
         <button>Search</button>
     </form>
 </div>
-</body>
+<div class="flex flex-jc-c error__message" th:if="${found == 'false'}">No results found</div>
 
+</body>
 
 <script type="text/javascript" th:src="@{/js/home_script.js}"></script>
 

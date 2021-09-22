@@ -4,10 +4,8 @@
 <body>
 <header th:replace="fragments/segments :: nav"/>
 
-<div th:if="${param.error}">
-    Invalid username and password.
-</div>
 <body>
+
 <div class="flex-col flex-jc-c flex-ai-c">
     <form
             class="flex-col flex-ai-c"
@@ -19,7 +17,7 @@
             <h1>Create your reservation, fill the fields bellow</h1>
         </div>
 
-        <div class="input__new-order">
+        <div class="input__data">
             <label for="reservation">Date:</label>
             <input
                     class="input__field"
@@ -30,13 +28,13 @@
                     required
             />
         </div>
-        <div class="input__new-order">
+        <div class="input__data">
           <span
                   th:if="${#fields.hasErrors('date')}"
                   th:errors="${reservation.date}"
           ></span>
         </div>
-        <div class="input__new-order">
+        <div class="input__data">
             <label for="customer">Customer name:</label>
             <input
                     class="input__field"
@@ -46,7 +44,7 @@
             />
         </div>
 
-        <div class="input__new-order">
+        <div class="input__data">
             <label for="email">Email:</label>
             <input
                     class="input__field"
@@ -55,7 +53,7 @@
                     th:field="${reservation.email}"
             />
         </div>
-        <div class="input__new-order">
+        <div class="input__data">
             <label for="phone">Phone:</label>
             <input
                     class="input__field"

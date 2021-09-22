@@ -6,7 +6,7 @@
 <div class="flex-col flex-jc-c flex-ai-c">
 <form th:action="@{/repairOrder/management/ordersByVehicleResult}" th:object="${vehicle}" method="post">
 
-        <h1>Search orders by vehicle license plate</h1>
+        <h1>Search orders by customer name</h1>
         <div class="flex flex-jc-c flex-ai-c">
             <label for="LicensePlate">License Plate:</label>
             <input class="input__licensePlate" type="text" placeholder="License plate number" minlength="1" maxlength="10" name="LicensePlate" id="LicensePlate"
@@ -16,14 +16,7 @@
         </div>
 </form>
     <div class="error__message" th:if="${found == 'false'}">No results found</div>
-
 </div>
-
-
-
-
-
 <script type="text/javascript" th:src="@{/js/home_script.js}"></script>
-
 </body>
 </html>

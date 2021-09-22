@@ -2,12 +2,8 @@ package com.yordan.karabelyov.Workshop.model;
 
 
 import com.yordan.karabelyov.Workshop.util.OrderStatus;
-import jdk.dynalink.Operation;
 import org.hibernate.annotations.CreationTimestamp;
-
 import org.springframework.format.annotation.DateTimeFormat;
-
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -22,7 +18,12 @@ public class RepairOrder {
 
     private double totalPrice;
 
+    private double partsPrice;
+
+    private double operationsPrice;
+
     private int hourPrice = 50;
+
 
     @ManyToMany
     public List<Mechanic> mechanicsWorked = new ArrayList<>();
@@ -136,6 +137,34 @@ public class RepairOrder {
         this.operations = operations;
     }
 
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public double getPartsPrice() {
+        return partsPrice;
+    }
+
+    public void setPartsPrice(double partsPrice) {
+        this.partsPrice = partsPrice;
+    }
+
+    public double getOperationsPrice() {
+        return operationsPrice;
+    }
+
+    public void setOperationsPrice(double operationsPrice) {
+        this.operationsPrice = operationsPrice;
+    }
+
+    public int getHourPrice() {
+        return hourPrice;
+    }
+
+    public void setHourPrice(int hourPrice) {
+        this.hourPrice = hourPrice;
+    }
+
     public void addPart(SparePart sparePart) {
         if (sparePart != null) {
             spareParts.add(sparePart);
@@ -151,6 +180,8 @@ public class RepairOrder {
     }
 
 
+
+
     public void calcTotalPrice() {
         Double price = 0.0;
 
@@ -158,10 +189,14 @@ public class RepairOrder {
         ) {
             price += part.getPrice();
         }
+
+        this.partsPrice = price;
+
         for (VehicleOperation operation : operations
         ) {
             price += (operation.getHours() * hourPrice);
         }
+        this.operationsPrice = price - partsPrice;
 
         this.totalPrice = BigDecimal.valueOf(price).setScale(3, RoundingMode.HALF_UP).doubleValue();
     }

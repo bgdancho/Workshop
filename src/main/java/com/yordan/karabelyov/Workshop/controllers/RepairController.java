@@ -71,7 +71,6 @@ public class RepairController {
     public String detailsForOrder(RepairOrder order, Model model) {
 
         RepairOrder orderFromDb = repairOrderService.findById(order.getId());
-        VehicleOperation vehicleOperation = new VehicleOperation();
 
         model.addAttribute("order", orderFromDb);
         return "/orders/details";
@@ -91,11 +90,14 @@ public class RepairController {
 
         SparePart sparePart = sparePartService.findByCode(part.getCode());
 
-        model.addAttribute("part", sparePart);
+
         model.addAttribute("order", order);
         if (sparePart == null) {
-            return "/parts/does-not-exists";
+            model.addAttribute("part", new SparePart());
+            model.addAttribute("inStock", "false");
+            return "/parts/add-part";
         }
+        model.addAttribute("part", sparePart);
         return "/parts/found-part";
     }
 
@@ -199,7 +201,9 @@ public class RepairController {
         List<RepairOrder> repairOrders = repairOrderService.ordersByVehicleLicensePlate(vehicle.getLicensePlate());
         if (repairOrders.isEmpty()){
             model.addAttribute("found","false");
-            return "orders/management/byVehicleResultOrders";
+            model.addAttribute("vehicle", new Vehicle());
+
+            return "orders/management/by-vehicle-orders";
         }
         model.addAttribute("orders", repairOrders);
         model.addAttribute("found", "true");

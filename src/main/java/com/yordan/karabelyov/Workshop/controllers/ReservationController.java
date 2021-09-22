@@ -91,6 +91,12 @@ public class ReservationController {
 
     @PostMapping("/save")
     public String saveReservation(Reservation reservation) {
+       Reservation inBaseReservation = reservationService.findById(reservation.getId());
+       if (inBaseReservation != null){
+           inBaseReservation.setCustomerName(reservation.getCustomerName());
+           inBaseReservation.setEmail(reservation.getEmail());
+           inBaseReservation.setPhoneNumber(reservation.getPhoneNumber());
+       }
         reservationService.save(reservation);
         return "redirect:/";
     }

@@ -4,21 +4,21 @@
 <body>
 <header th:replace="fragments/segments :: nav"/>
 <form th:action="@{/repairOrder/searchPart}" th:object="${part}" method="post">
-    <div class="container">
+    <div class="flex flex-jc-c">
         <h1>Add new part to order</h1>
-        <hr>
-
-        <label for="PartCode"><b>Part Code:</b></label>
-        <input type="text" placeholder="Part Code" minlength="1" maxlength="10" name="PartCode" id="PartCode"
-               th:field="${part.code}" required>
-
-        <input type="text"
-               th:field="${order.id}">
-        <button>Search</button>
     </div>
+        <div class="flex flex-jc-c flex-ai-c">
+        <label for="PartCode"><b>Part Code:</b></label>
+        <input class="input__newPart" type="text" placeholder="Part Code" minlength="1" maxlength="10" name="PartCode" id="PartCode"
+               th:field="${part.code}" required>
+        <input type="hidden"
+               th:field="${order.id}">
+
+            <button>Search</button>
+        </div>
+    <div class="flex flex-jc-c error__message" th:if="${inStock == 'false'}">No results found</div>
+
 </form>
-
-
 
 <script type="text/javascript" th:src="@{/js/home_script.js}"></script>
 

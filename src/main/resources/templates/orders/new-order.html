@@ -6,18 +6,15 @@
 
 <body>
 <div class="flex-col flex-jc-c flex-ai-c">
-    <form
-            class="flex-col flex-ai-c"
-            th:action="@{/repairOrder/save}"
-            method="post"
-    >
+    <form class="flex-col flex-ai-c"
+          th:action="@{/repairOrder/save}"
+          method="post">
         <div>
             <h1>Please fill in the information to create a new order:</h1>
         </div>
-        <div class="input__new-order">
+        <div class="input__data">
             <label for="VIN">VIN:</label>
-            <input
-                    class="input__field"
+            <input class="input__field"
                     type="text"
                     placeholder="Enter VIN"
                     minlength="13"
@@ -28,7 +25,7 @@
                     required
             />
         </div>
-        <div class="input__new-order">
+        <div class="input__data">
             <label for="brand">Manufacturer</label>
             <input
                     class="input__field"
@@ -40,7 +37,7 @@
                     required
             />
         </div>
-        <div class="input__new-order">
+        <div class="input__data">
             <label for="model">Model</label>
             <input
                     class="input__field"
@@ -53,7 +50,7 @@
             />
         </div>
 
-        <div class="input__new-order">
+        <div class="input__data">
             <label for="engine">Engine</label>
             <input
                     class="input__field"
@@ -65,7 +62,7 @@
             />
         </div>
 
-        <div class="input__new-order">
+        <div class="input__data">
             <label for="LP">License Plate</label>
             <input
                     class="input__field"
@@ -79,7 +76,7 @@
             />
         </div>
 
-        <div class="input__new-order">
+        <div class="input__data">
             <label for="mechanic">Mechanic</label>
             <select class="input__field" id="mechanic" th:field="${mechanic.id}">
                 <option
@@ -90,7 +87,7 @@
             </select>
         </div>
 
-        <div class="input__new-order">
+        <div class="input__data">
             <label for="endDate">Repair order end date</label>
             <input
                     class="input__field"
@@ -104,5 +101,7 @@
         </div>
     </form>
 </div>
+<script type="text/javascript" th:src="@{/js/home_script.js}"></script>
+
 </body>
 </html>

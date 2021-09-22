@@ -4,9 +4,14 @@
 <head th:replace="fragments/segments :: head"/>
 <body>
 <header th:replace="fragments/segments :: nav"/>
-Details for order
 
-<table>
+<body>
+<div class="flex flex-jc-c">
+    <h1>Details for Order</h1>
+</div>
+
+
+<table class="table__main">
     <thead>
     <tr>
         <th>Order Id</th>
@@ -15,81 +20,204 @@ Details for order
         <th>Model</th>
         <th>Engine</th>
         <th>License Plate</th>
-
     </tr>
     </thead>
     <tbody>
     <tr>
-        <td th:text="${order.id}"/>
-        <td th:text="${order.status}"/>
-        <td th:text="${order.vehicle.vin}"/>
-        <td th:text="${order.vehicle.model}"/>
-        <td th:text="${order.vehicle.engineSize}"/>
-        <td th:text="${order.vehicle.licensePlate}"/>
-    </tr>
-    </tbody>
-</table>
-<table>
-    <thead>
-    <tr>
-        <td>Spare part</td>
-        <td>Code</td>
-        <td>Price</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="part : ${order.spareParts}">
-        <td th:text="${part.name}"></td>
-        <td th:text="${part.code}"></td>
-        <td th:text="${part.price}"></td>
-    </tr>
-    </tbody>
-</table>
-<br>
-<table>
-    <thead>
-    <tr>
-        <td>Operation</td>
-        <td>Mechanic</td>
-        <td>Hours</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="operation : ${order.operations}">
-        <td th:text="${operation.type}"></td>
-        <td th:text="${operation.mechanic.name}"></td>
-        <td th:text="${operation.hours}"></td>
+        <td th:text="${order.id}" />
+        <td th:text="${order.status}" />
+        <td th:text="${order.vehicle.vin}" />
+        <td th:text="${order.vehicle.model}" />
+        <td th:text="${order.vehicle.engineSize}" />
+        <td th:text="${order.vehicle.licensePlate}" />
     </tr>
     </tbody>
 </table>
 
-<br>
-<label for="totalPrice">Total Price:</label>
-<span th:text="${order.totalPrice}" id="totalPrice"></span>
-<div  th:if="${order.status =='STARTED'}">
-    <p>Add part to this order</p>
-    <form th:action="@{/repairOrder/newPart}" method="post" th:object="${order}">
-        <input type="text" th:field="${order.id}">
-        <button>Add part</button>
-    </form>
+<div class="flex flex-jc-se">
+
+    <table class="table__sec">
+        <thead>
+        <tr>
+            <th>Spare part</td>
+            <th>Code</td>
+            <th>Price</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="part : ${order.spareParts}">
+            <td th:text="${part.name}"></td>
+            <td th:text="${part.code}"></td>
+            <td th:text="${part.price}"></td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+
+
+    <table class="table__sec">
+        <thead>
+        <tr>
+            <div>
+                <th class="table__th">Operation</td>
+                <th>Mechanic</td>
+                <th>Hours</td>
+            </div>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="operation : ${order.operations}">
+            <td th:text="${operation.type}"></td>
+            <td th:text="${operation.mechanic.name}"></td>
+            <td th:text="${operation.hours}"></td>
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>
+<div class="flex flex-jc-sb">
+    <div class="price">
+        <label for="parts">Parts:</label>
+        <span th:text="${order.partsPrice}" id="parts"></span>
+    </div>
+    <div class="price">
+        <label for="operations">Operations:</label>
+        <span th:text="${order.operationsPrice}" id="operations"></span>
+    </div>
+
+</div>
+<div class="flex flex-jc-c details__buttons">
+    <div th:if="${order.status =='STARTED'}">
+        <form
+                th:action="@{/repairOrder/newPart}"
+                method="post"
+                th:object="${order}"
+        >
+            <input type="hidden" th:field="${order.id}" />
+            <button>Add part to order</button>
+        </form>
+    </div>
+
+    <div th:if="${order.status =='STARTED'}">
+
+        <form th:action="@{/repairOrder/newOperation}" method="post">
+            <input type="hidden" th:field="${order.id}" />
+            <button>Add operation</button>
+        </form>
+    </div>
+
+    <div th:if="${order.status =='STARTED'}">
+        <form th:action="@{/repairOrder/completed}" method="post">
+            <input type="hidden" th:field="${order.id}">
+            <button >Repair completed</button>
+        </form>
+    </div>
+
+</div>
+<div class="flex flex-jc-sb">
+    <div class="price"></div>
+    <div class="price">
+        <label for="totalPrice">Total Price:</label>
+        <span th:text="${order.totalPrice}" id="totalPrice"></span>
+    </div>
 </div>
 
-<div th:if="${order.status =='STARTED'}">
-    <p>Add operation to this order</p>
-    <form th:action="@{/repairOrder/newOperation}" method="post">
-        <input type="text" th:field="${order.id}">
-        <button >Add part</button>
-    </form>
-</div>
-
-<div th:if="${order.status =='STARTED'}">
-    <form th:action="@{/repairOrder/completed}" method="post">
-        <input type="text" th:field="${order.id}">
-        <button >Repair completed</button>
-    </form>
-</div>
 
 <script type="text/javascript" th:src="@{/js/home_script.js}"></script>
+</body>
+
+
+<!--Details for order-->
+
+<!--<table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>Order Id</th>-->
+<!--        <th>Order status</th>-->
+<!--        <th>Vehicle VIN</th>-->
+<!--        <th>Model</th>-->
+<!--        <th>Engine</th>-->
+<!--        <th>License Plate</th>-->
+
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr>-->
+<!--        <td th:text="${order.id}"/>-->
+<!--        <td th:text="${order.status}"/>-->
+<!--        <td th:text="${order.vehicle.vin}"/>-->
+<!--        <td th:text="${order.vehicle.model}"/>-->
+<!--        <td th:text="${order.vehicle.engineSize}"/>-->
+<!--        <td th:text="${order.vehicle.licensePlate}"/>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+<!--<table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <td>Spare part</td>-->
+<!--        <td>Code</td>-->
+<!--        <td>Price</td>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="part : ${order.spareParts}">-->
+<!--        <td th:text="${part.name}"></td>-->
+<!--        <td th:text="${part.code}"></td>-->
+<!--        <td th:text="${part.price}"></td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+<!--<br>-->
+<!--<table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <td>Operation</td>-->
+<!--        <td>Mechanic</td>-->
+<!--        <td>Hours</td>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="operation : ${order.operations}">-->
+<!--        <td th:text="${operation.type}"></td>-->
+<!--        <td th:text="${operation.mechanic.name}"></td>-->
+<!--        <td th:text="${operation.hours}"></td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+
+<!--<br>-->
+<!--<label for="totalPrice">Total Price:</label>-->
+<!--<span th:text="${order.totalPrice}" id="totalPrice"></span>-->
+<!--<div  th:if="${order.status =='STARTED'}">-->
+<!--    <p>Add part to this order</p>-->
+<!--    <form th:action="@{/repairOrder/newPart}" method="post" th:object="${order}">-->
+<!--        <input type="text" th:field="${order.id}">-->
+<!--        <button>Add part</button>-->
+<!--    </form>-->
+<!--</div>-->
+
+<!--<div th:if="${order.status =='STARTED'}">-->
+<!--    <p>Add operation to this order</p>-->
+<!--    <form th:action="@{/repairOrder/newOperation}" method="post">-->
+<!--        <input type="hidden" th:field="${order.id}">-->
+<!--        <button >Add part</button>-->
+<!--    </form>-->
+<!--</div>-->
+
+<!--<div th:if="${order.status =='STARTED'}">-->
+<!--    <form th:action="@{/repairOrder/completed}" method="post">-->
+<!--        <input type="hidden" th:field="${order.id}">-->
+<!--        <button >Repair completed</button>-->
+<!--    </form>-->
+<!--</div>-->
+
+<!--<script type="text/javascript" th:src="@{/js/home_script.js}"></script>-->
 
 </body>
 </html>

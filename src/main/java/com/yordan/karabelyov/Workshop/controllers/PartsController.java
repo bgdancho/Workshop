@@ -26,12 +26,13 @@ public class PartsController {
     public String editPart(SparePart part, Model model) {
 
         SparePart sparePart = sparePartService.findByCode(part.getCode());
-
         if (sparePart != null) {
             model.addAttribute("part", sparePart);
             return "/parts/management/edit-part";
         }
-        return "parts/does-not-exists";
+        model.addAttribute("part", new SparePart());
+        model.addAttribute("found","false");
+        return "parts/management/search-part";
     }
 
     @RequestMapping("/parts/management/searchPart")
@@ -86,7 +87,7 @@ public class PartsController {
     @PostMapping("/parts/management/partDelete")
     public String deletePart(SparePart part, Model model) {
         if (!sparePartService.exists(part.getCode())){
-            model.addAttribute("error", "This part does not exist");
+            model.addAttribute("found", "false");
             model.addAttribute("part", part);
             return "parts/management/delete-part";
         }

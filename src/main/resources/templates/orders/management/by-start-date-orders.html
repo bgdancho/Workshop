@@ -4,11 +4,16 @@
 <body>
 <header th:replace="fragments/segments :: nav"/>
 
-<h1>Orders by starting date</h1>
 <span th:if="${found == 'false'}">No results found</span>
 
-<div class="flex flex-jc-c flex-ai-c">
-    <table th:if="${found == 'true'}">
+<div class="flex-col flex-col-jc-c flex-ai-c">
+
+    <div>
+        <h1>Orders by starting date</h1>
+    </div>
+    <table class="table__main" th:if="${found == 'true'}">
+
+
         <thead>
         <tr>
             <th>Order Id</th>

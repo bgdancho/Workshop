@@ -42,7 +42,7 @@ public class CarWorkshopApplication implements CommandLineRunner {
 
     @Override
     @Transactional
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
 
         Vehicle testVehicle = new Vehicle("123456798", "ca 1111 ca");

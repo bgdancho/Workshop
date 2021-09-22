@@ -3,25 +3,28 @@
 <head th:replace="fragments/segments :: head"/>
 <body>
 <header th:replace="fragments/segments :: nav"/>
-<div class="mapouter">
-    <div class="gmap_canvas">
-        <iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-                src="https://maps.google.com/maps?width=300&amp;height=300&amp;hl=en&amp;q=Sofia Drujba 2&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
-        <a href="https://www.fnfgo.com/">Friday Night Funkin Mods</a></div>
-    <style>
+<div class="flex-col flex-jc-c flex-ai-c">
+    <div class="mapouter">
+        <div class="gmap_canvas">
+            <iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                    src="https://maps.google.com/maps?width=300&amp;height=300&amp;hl=en&amp;q=Sofia Drujba 2&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+            <a href="https://www.fnfgo.com/">Friday Night Funkin Mods</a></div>
+        <style>
 
-    .mapouter{margin:25px 40%};
-        .mapouter{position:inline-block;text-align:right;width:100%;height:300px;}.gmap_canvas {overflow:hidden;background:none!important;width:300px;height:300px;}.gmap_iframe {height:300px!important;}
+            .mapouter{margin:25px 40%};
+            .mapouter{position:inline-block;text-align:right;width:100%;height:300px;}.gmap_canvas {overflow:hidden;background:none!important;width:300px;height:300px;}.gmap_iframe {height:300px!important;}
 
 
 
-    </style>
+        </style>
+    </div>
+    <div class="flex-col flex-jc-c flex-ai-c contact__details">
+        <p>Chief mechanic: 0888 888 888</p>
+        <p>Reception : 0882 882 882</p>
+
+    </div>
 </div>
-<div class="info">
-    <p>Chief mechanic: 0888 888 888</p>
-    <p>Reception : 0882 882 882</p>
 
-</div>
 <script type="text/javascript" th:src="@{/js/home_script.js}"></script>
 
 </body>

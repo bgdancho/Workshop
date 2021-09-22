@@ -8,8 +8,9 @@
 </head>
 <body>
 <header th:fragment="nav" class="header">
-    <div class="overlay fade-out"></div>
+<!--    <div class="overlay fade-out"></div>-->
     <nav>
+        <div class="overlay closed"></div>
         <div class="container header__links flex flex-jc-sb flex-ai-c">
             <div class="group flex flex-jc-s">
                 <a th:href="@{/}">Home</a>
@@ -29,20 +30,18 @@
                 <a th:href="@{/contacts}">Contacts</a>
             </div>
         </div>
-        <div class="header__parts__menu fade-out">
-            <span class="closeParts">&#x2715</span>
-            <a th:href="@{/parts/management/newPart}">Add Spare Part</a>
-            <a th:href="@{/parts/management/searchPart}">Edit Spare Part</a>
-            <a th:href="@{/parts/management/delete}">Delete Spare Part</a>
+        <div id="parts" class="header__parts__menu closed fade-out">
+            <span class="closeMenu">&#x2715</span>
+            <a class="link" th:href="@{/parts/management/newPart}">Add Spare Part</a>
+            <a class="link" th:href="@{/parts/management/searchPart}">Edit Spare Part</a>
+            <a class="link" th:href="@{/parts/management/delete}">Delete Spare Part</a>
         </div>
-        <div class="header__orders__menu fade-out">
-            <span class="closeOrders">&#x2715</span>
-            <a th:href="@{/repairOrder/management/completedOrders}">Completed</a>
-            <a th:href="@{/repairOrder/management/notCompletedOrders}">Not Completed</a>
-            <a th:href="@{/repairOrder/management/ordersByDate}">Date Started</a>
-            <a th:href="@{/repairOrder/management/ordersByVehicle}">By Vehicle</a>
-            <a th:href="@{/repairOrder/management/ordersByCustomer}">By Customer</a>
-
+        <div id="orders" class=" closed header__orders__menu closed fade-out">
+            <span class="closeMenu">&#x2715</span>
+            <a class="link " th:href="@{/repairOrder/management/completedOrders}">Completed</a>
+            <a class="link " th:href="@{/repairOrder/management/notCompletedOrders}">Not Completed</a>
+            <a class="link " th:href="@{/repairOrder/management/ordersByDate}">Date Started</a>
+            <a class="link " th:href="@{/repairOrder/management/ordersByVehicle}">By Vehicle</a>
         </div>
     </nav>
 </header>

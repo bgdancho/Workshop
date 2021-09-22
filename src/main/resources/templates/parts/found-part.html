@@ -4,36 +4,44 @@
 <body>
 <header th:replace="fragments/segments :: nav"/>
 
-<form th:action="@{/repairOrder/insertPart}" th:object="${part}" method="post">
-    <div class="container">
-        <h1>Spare part found</h1>
-        <hr>
 
-        <label for="PartCode"><b>Part Code:</b></label>
-        <input type="text" placeholder="Part Code" minlength="1" maxlength="10" name="PartCode" id="PartCode"
+<div class="flex-col flex-jc-c flex-ai-c">
+
+<form class="flex-col flex-ai-c" th:action="@{/repairOrder/insertPart}" th:object="${part}" method="post">
+<div>
+    <h1>Spare part in stock, details:</h1>
+</div>
+
+    <div class="input__data">
+        <label for="PartCode">Part Code:</label>
+        <input class="input__field" type="text" placeholder="Part Code" minlength="1" maxlength="10" name="PartCode" id="PartCode"
                th:field="${part.code}" readonly>
-
-        <label for="inStock"><b>In Stock:</b></label>
-        <input type="text" minlength="1" maxlength="10" name="inStock" id="inStock"
+    </div>
+    <div class="input__data">
+        <label for="inStock">In Stock:</label>
+        <input class="input__field" type="text" minlength="1" maxlength="10" name="inStock" id="inStock"
                th:field="${part.inStock}" readonly>
         <span th:if="${error}"
               th:text="${error}">Error</span>
-
-        <label for="name"><b>Type:</b></label>
-        <input type="text" minlength="1" maxlength="10" name="name" id="name"
-               th:field="${part.name}" readonly>
-
-        <label for="price"><b>Price:</b></label>
-        <input type="text" minlength="1" maxlength="10" name="price" id="price"
-               th:field="${part.price}">
-
-        <input type="text" id="orderId"
-               th:field="${order.id}">
-
-        <button>Add to Repair order</button>
     </div>
+    <div class="input__data">
+        <label for="name">Type:</label>
+        <input class="input__field" type="text" minlength="1" maxlength="10" name="name" id="name"
+               th:field="${part.name}" readonly>
+    </div>
+    <div class="input__data">
+        <label for="price">Price:</label>
+        <input class="input__field" type="text" minlength="1" maxlength="10" name="price" id="price"
+               th:field="${part.price}">
+    </div>
+        <input type="hidden" id="orderId"
+               th:field="${order.id}">
+<div>
+    <button>Add to Repair order</button>
+</div>
+
 </form>
 <script type="text/javascript" th:src="@{/js/home_script.js}"></script>
-
+</div>
 </body>
 </html>
